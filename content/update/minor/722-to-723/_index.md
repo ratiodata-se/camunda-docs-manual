@@ -17,6 +17,7 @@ This document guides you through the update from Camunda `7.22.x` to `7.23.0` an
 
 1. For administrators and developers: [Database updates](#database-updates)
 1. For administrators and developers: [Full distribution update](#full-distribution)
+1. For administrators and developers: [Downsized WildFly distribution](#downsized-wildfly-distribution)
 1. For administrators and developers: [Bootstrap NES and AngularJS NES by HeroDevs, Inc.](#bootstrap-nes-and-angularjs-nes-by-herodevs-inc)
 1. For developers: [Set Variables Async API](#set-variables-async-api)
 1. For developers: [GraalVM Upgrade](#graalvm-upgrade)
@@ -43,9 +44,9 @@ The following steps are required:
 
 Before starting, ensure you have downloaded the Camunda 7.23 distribution for the application server you use. This contains the SQL scripts and libraries required for the update. This guide assumes you have unpacked the distribution to a path named `$DISTRIBUTION_PATH`.
 
-# Downsized WildFly distribution
+# Downsized WildFly Distribution
 
-From 7.24.1 to 7.24.2, the WildFly distribution has been downsized by removing optional components that are not commonly used in typical Camunda installations.
+From 7.23.6 to 7.23.7, the WildFly Distribution has been downsized by removing optional components that are not commonly used in typical Camunda installations.
 Read more details in the [Patch Level Update Guide]({{< ref "/update/patch-level.md#downsized-wildfly-distribution" >}}).
 
 # Bootstrap NES and AngularJS NES by HeroDevs, Inc.

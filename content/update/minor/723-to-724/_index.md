@@ -17,6 +17,7 @@ This document guides you through the update from Camunda `7.23.x` to `7.24.0` an
 
 1. For administrators and developers: [Database updates](#database-updates)
 1. For administrators and developers: [Full distribution update](#full-distribution)
+1. For administrators and developers: [Downsized WildFly distribution](#downsized-wildfly-distribution)
 1. For administrators and developers: [Docker Base Image Update](#docker-base-image-update)
 1. For administrators and developers: [JMX Prometheus Javaagent Update](#jmx-prometheus-javaagent-upgrade)
 1. For administrators and developers: [LegacyJobRetryBehaviorEnabled process engine flag](#legacyjobretrybehaviorenabled-process-engine-flag)
@@ -46,9 +47,9 @@ The following steps are required:
 
 Before starting, ensure you have downloaded the Camunda 7.24 distribution for the application server you use. This contains the SQL scripts and libraries required for the update. This guide assumes you have unpacked the distribution to a path named `$DISTRIBUTION_PATH`.
 
-# Downsized WildFly distribution
+# Downsized WildFly Distribution
 
-From 7.24.1 to 7.24.2, the WildFly distribution has been downsized by removing optional components that are not commonly used in typical Camunda installations.
+From 7.24.1 to 7.24.2, the WildFly Distribution has been downsized by removing optional components that are not commonly used in typical Camunda installations.
 Read more details in the [Patch Level Update Guide]({{< ref "/update/patch-level.md#downsized-wildfly-distribution" >}}).
 
 # Docker Base Image Update
