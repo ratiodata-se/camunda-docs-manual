@@ -239,6 +239,33 @@ The following is a list with the most commonly used process engine configuration
   </tr>
 
   <tr>
+    <td><code>validateReferences</code></td>
+    <td>Boolean</td>
+    <td>
+      Enables validation of referenced entities when authorizations are persisted.
+      <p>
+        When set to <code>true</code>, the process engine validates that all referenced
+        users, groups, and resources exist before saving an authorization.
+      </p>
+      <p>
+        This validation is performed independently of whether authorization checks
+        are enabled.
+      </p>
+      <p>
+        <strong>Default value:</strong> <code>false</code>
+      </p>
+
+      <p>
+        The validation applies to all authorization resource types supported by
+        the process engine. For a complete list of resources, see
+        <a href="https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#resources">
+            Authorization Resources
+        </a>
+      </p>
+    </td>
+  </tr>
+
+  <tr>
     <td><code>autoStoreScriptVariables</code></td>
     <td>Boolean</td>
     <td>
