@@ -252,7 +252,7 @@ The following is a list with the most commonly used process engine configuration
         are enabled.
       </p>
       <p>
-        <strong>Default value:</strong> <code>false</code>
+        <strong>Default value:</strong> <code>true</code>
       </p>
 
       <p>
