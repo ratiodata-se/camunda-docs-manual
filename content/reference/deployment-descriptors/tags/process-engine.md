@@ -258,7 +258,7 @@ The following is a list with the most commonly used process engine configuration
       <p>
         The validation applies to all authorization resource types supported by
         the process engine. For a complete list of resources, see
-        <a href="https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#resources">
+        <a href="{{< ref "/user-guide/process-engine/authorization-service.md#resources" >}}">
             Authorization Resources
         </a>
       </p>
