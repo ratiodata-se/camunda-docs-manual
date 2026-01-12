@@ -163,7 +163,7 @@ The following example shows an XML snippet which can be placed in both [processe
       </p>
       <p>
         <strong>Text Content:</strong>
-        The value of the property to be set. Property values are converted into String, Integer or Boolean values, depending on the type of the setter in the process engine configuration (or plugin) class.
+        The value of the property to be set. Property values are converted into String, Integer, or Boolean values, depending on the type of the setter in the process engine configuration (or plugin) class.
       </p>
       <p>
         <strong>Example:</strong> <br>
