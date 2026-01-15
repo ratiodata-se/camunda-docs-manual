@@ -790,9 +790,9 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 <td><code>false</code></td>
 </tr>
 
-<tr><td colspan="4"><b>Authorization</b></td></tr>
+<tr><td colspan="5"><b>Authorization</b></td></tr>
 <tr>
-<td rowspan="4"><code>camunda.bpm.authorization</code></td>
+<td rowspan="5"><code>camunda.bpm.authorization</code></td>
 <td><code>.enabled</code></td>
 <td>Enables authorization</td>
 <td><i>Camunda default value</i></td>
@@ -815,7 +815,6 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 <td>Performs tenant checks to ensure that an authenticated user can only access data that belongs to one of his tenants.</td>
 <td><code>true</code></td>
 </tr>
-
 
 
 <tr>
