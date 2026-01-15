@@ -46,6 +46,7 @@ This change improves data consistency by preventing invalid authorization entrie
 Applications that create authorization entries with incomplete or invalid references may now encounter failures during save operations (for example, resulting in a `ProcessEngineException`).
 
 This can affect in particular:
+
 * Custom identity provider integrations
 * Direct or low-level usage of the `AuthorizationService`
 * Bootstrap or migration scripts that manually create authorization data
