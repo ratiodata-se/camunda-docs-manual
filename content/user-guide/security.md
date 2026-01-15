@@ -142,16 +142,6 @@ When enabled, the engine ensures that:
 
 If a referenced entity cannot be resolved, the authorization is rejected.
 
-You can enable this validation in a Spring-based or Camunda Run setup
-by setting the following configuration property:
-
-```yaml
-camunda:
-  bpm:
-    authorization:
-      validate-references: true
-```
-
 {{< note title="Heads-up!" class="warning" >}}
 This validation is independent of whether authorization checks are enabled.
 It applies to saving authorizations only and does not affect runtime permission checks.
