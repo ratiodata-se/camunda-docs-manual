@@ -121,6 +121,12 @@ The resource pattern can be changed using properties (see [properties](#camunda-
 
 Applies the authorization configuration to the process engine. If not configured, the `camunda` default values are used (see [properties](#camunda-engine-properties)).
 
+
+{{< note title="" class="info" >}}
+  Starting with **Camunda 7.24.3**, the engine validates authorization references by default (see `camunda.bpm.authorization.validate-references` below).
+{{< /note >}}
+
+
 ## Overriding the Default Configuration
 
 Provide a bean implementing one of the marker interfaces. For example to customize the datasource configuration:
@@ -810,6 +816,17 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 <td><code>true</code></td>
 </tr>
 
+
+
+<tr>
+<td><code>.validate-references</code></td>
+<td>
+Enables validation of authorization references when authorizations are persisted (users, groups, and resource references).
+This validation is performed independently of whether authorization checks are enabled.
+</td>
+<td><code>true</code></td>
+</tr>
+
 <tr><td colspan="4"><b>Admin User</b></td></tr>
 <tr>
 <td rowspan="3"><code>camunda.bpm.admin-user</code></td>
@@ -908,6 +925,18 @@ camunda.bpm:
   filter:
     create: All tasks
 ```
+
+
+Configure authorization validation via exposed properties:
+
+```yaml
+camunda:
+  bpm:
+    authorization:
+      enabled: true
+      validate-references: true
+```
+
 Override configuration using generic properties:
 
 ```yaml

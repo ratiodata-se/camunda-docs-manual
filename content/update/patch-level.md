@@ -96,6 +96,57 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 </beans>
 ```
 
+
+#### Additional Validation for Authorization Resources
+
+Starting with this patch release, the process engine performs **additional validation when creating authorizations**.
+
+A configuration flag `validateReferences` is enabled by default.  
+When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
+
+* Null or empty user IDs
+* Null or empty group IDs
+* Invalid or inconsistent references depending on the authorization resource type
+
+This change improves data consistency by preventing invalid authorization entries from being persisted.
+
+##### Impact
+
+Applications that create authorization entries with incomplete or invalid references may now encounter failures during save operations (for example, resulting in a `ProcessEngineException`).
+
+This can affect in particular:
+
+* Custom identity provider integrations
+* Direct or low-level usage of the `AuthorizationService`
+* Bootstrap or migration scripts that manually create authorization data
+
+##### Migration Notes
+
+We recommend reviewing custom authorization creation logic and ensuring that all required references are properly populated before saving authorizations.
+
+If required, the additional validation can be disabled to restore the legacy behavior via process engine configuration:
+
+```xml
+<property name="validateReferences">false</property>
+```
+
+or programmatically via the Java API:
+
+```java
+processEngineConfiguration.setValidateReferences(false);
+```
+
+For Spring Boot applications, you can configure it via `application.yml`:
+
+```yaml
+camunda:
+  bpm:
+    authorization:
+      validate-references: false
+```
+
+{{< /details >}}
+
 {{< details left="7.24.2 / 7.23.7 / 7.22.10" right="Nov/2025">}}
 #### Downsized WildFly distribution
 
