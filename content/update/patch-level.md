@@ -26,46 +26,75 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
-{{< details left="7.24.3" right="Jan/2026">}}
+{{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Apr/2026">}}
+#### Datasource autocommit verification
 
-#### Additional Validation for Authorization Resources
+Starting with Camunda 7.24.3, 7.23.8, and 7.22.11, the process engine now performs a verification of the default autocommit setting for database connections. This check is enabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will throw an exception during initialization.
 
-Starting with this patch release, the process engine performs **additional validation when creating authorizations**.
+Camunda is designed to operate in a transactional mode. Misconfiguring a datasource with autocommit enabled is known to cause data inconsistency, deadlocks, and unexpected runtime behavior. This verification ensures environment stability by preventing the engine from starting in an unsupported state.
 
-A configuration flag `validateReferences` is enabled by default.  
-When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
+##### Changes in configuring
 
-* Null or empty user IDs
-* Null or empty group IDs
-* Invalid or inconsistent references depending on the authorization resource type
-
-This change improves data consistency by preventing invalid authorization entries from being persisted.
-
-##### Impact
-
-Applications that create authorization entries with incomplete or invalid references may now encounter failures during save operations (for example, resulting in a `ProcessEngineException`).
-
-This can affect in particular:
-
-* Custom identity provider integrations
-* Direct or low-level usage of the `AuthorizationService`
-* Bootstrap or migration scripts that manually create authorization data
-
-##### Migration Notes
-
-We recommend reviewing custom authorization creation logic and ensuring that all required references are properly populated before saving authorizations.
-
-If required, the additional validation can be disabled to restore the legacy behavior via process engine configuration:
+Below is an example of configuration with separate datasource bean with `defaultAutoCommit` property set to `false`:
 
 ```xml
-<property name="validateReferences">false</property>
-```
-or programmatically via the Java API:
-```java
-    processEngineConfiguration.setValidateReferences(false);
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="camundaDataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+    <property name="driver" value="org.h2.Driver"/>
+    <property name="url" value="jdbc:h2:mem:camunda-autocommit;DB_CLOSE_DELAY=-1"/>
+    <property name="username" value="sa"/>
+    <property name="password" value=""/>
+    <property name="defaultAutoCommit" value="false"/>
+  </bean>
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="dataSource" ref="camundaDataSource"/>
+    <property name="databaseSchemaUpdate" value="true"/>
+    <property name="jobExecutorActivate" value="false"/>
+  </bean>
+</beans>
 ```
 
-{{< /details >}}
+If you do not define a separate datasource bean and instead allow `ProcessEngineConfiguration` to initialize the connection directly using jdbcUrl, no action is required. In this scenario, Camunda internally forces `defaultAutoCommit` to `false`.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="jdbcDriver" value="org.h2.Driver"/>
+    <property name="jdbcUrl" value="jdbc:h2:mem:camunda-autocommit;DB_CLOSE_DELAY=-1"/>
+    <property name="jdbcUsername" value="sa"/>
+    <property name="jdbcPassword" value=""/>
+    <property name="databaseSchemaUpdate" value="true"/>
+    <property name="skipAutoCommitCheck" value="false"/>
+    <property name="jobExecutorActivate" value="false"/>
+  </bean>
+</beans>
+```
+
+If you cannot immediately modify your datasource configuration, you can temporarily bypass the exception using the `skipAutoCommitCheck` property. While this prevents the engine from failing at startup, a warning will still be logged.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="dataSource" ref="camundaDataSource"/>
+    <property name="databaseSchemaUpdate" value="true"/>
+    <property name="jobExecutorActivate" value="false"/>
+    <property name="skipAutoCommitCheck" value="true"/>
+  </bean>
+</beans>
+```
 
 {{< details left="7.24.2 / 7.23.7 / 7.22.10" right="Nov/2025">}}
 #### Downsized WildFly distribution
