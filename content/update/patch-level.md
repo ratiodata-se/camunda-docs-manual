@@ -30,7 +30,7 @@ This section describes noteworthy potentially breaking changes when you update t
 
 #### Additional Validation for Authorization Resources
 
-Starting with this patch release, the process engine performs **additional validation on authorization resources during save operations**.
+Starting with this patch release, the process engine performs **additional validation when creating authorizations**.
 
 A configuration flag `validateReferences` is enabled by default.  
 When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
