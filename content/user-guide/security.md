@@ -121,6 +121,32 @@ Similar considerations as for authentication apply. For an in-depth discussion, 
 
 Authorizations can be used to restrict a user from accessing a data object (such as a process or a task) and can be used to restrict how the user can interact with such data objects (read-only vs. modifications). Authorizations in Camunda are very powerful and it is recommended to read the corresponding [documentation entry on authorizations]({{< ref "/user-guide/process-engine/authorization-service.md" >}}).
 
+### Validating Authorization References
+
+When working with authorizations, it is possible to create authorization entries
+that reference users, groups, or resources which no longer exist (for example,
+after deleting identity data or cleaning up resources).
+
+To prevent invalid or inconsistent authorization data, the process engine can
+validate all referenced entities when authorizations are persisted.
+
+This behavior can be enabled via the process engine configuration property
+`validateAuthResourceIdExists`.
+
+When enabled, the engine ensures that:
+
+* Referenced users exist
+* Referenced groups exist
+* Referenced resources (such as process definitions, deployments, tasks, etc.)
+  exist
+
+If a referenced entity cannot be resolved, the authorization is rejected.
+
+{{< note title="Heads-up!" class="warning" >}}
+This validation is independent of whether authorization checks are enabled.
+It applies to saving authorizations only and does not affect runtime permission checks.
+{{< /note >}}
+
 ### Prevent: Enumerating user accounts by brute-force creating new users
 
 Under certain circumstances, an attacker can enumerate user accounts by brute-force creating new users:

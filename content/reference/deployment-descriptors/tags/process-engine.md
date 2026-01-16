@@ -163,7 +163,7 @@ The following example shows an XML snippet which can be placed in both [processe
       </p>
       <p>
         <strong>Text Content:</strong>
-        The value of the property to be set. Property values are converted into String, Integer or Boolean values, depending on the type of the setter in the process engine configuration (or plugin) class.
+        The value of the property to be set. Property values are converted into String, Integer, or Boolean values, depending on the type of the setter in the process engine configuration (or plugin) class.
       </p>
       <p>
         <strong>Example:</strong> <br>
@@ -236,6 +236,33 @@ The following is a list with the most commonly used process engine configuration
     <td><code>authorizationEnabled</code></td>
     <td>Boolean</td>
     <td>Activates <a href="{{< ref "/user-guide/process-engine/authorization-service.md#enable-authorization-checks ">}}">authorization checks</a>.</td>
+  </tr>
+
+  <tr>
+    <td><code>validateAuthResourceIdExists</code></td>
+    <td>Boolean</td>
+    <td>
+      Enables validation of referenced entities when authorizations are persisted.
+      <p>
+        When set to <code>true</code>, the process engine validates that all referenced
+        users, groups, and resources exist before saving an authorization.
+      </p>
+      <p>
+        This validation is performed independently of whether authorization checks
+        are enabled.
+      </p>
+      <p>
+        <strong>Default value:</strong> <code>true</code>
+      </p>
+
+      <p>
+        The validation applies to all authorization resource types supported by
+        the process engine. For a complete list of resources, see
+        <a href="{{< ref "/user-guide/process-engine/authorization-service.md#resources" >}}">
+            Authorization Resources
+        </a>
+      </p>
+    </td>
   </tr>
 
   <tr>

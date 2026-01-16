@@ -191,7 +191,7 @@ The following resources are available:
   <tr>
     <td>User Operation Log Category</td>
     <td>17</td>
-    <td>User Operation Log Entry Category</td>
+    <td>Admin/Operator/TaskWorker/*</td>
   </tr>
   <tr>
     <td>System</td>

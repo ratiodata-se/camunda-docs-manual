@@ -26,7 +26,7 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
-{{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Apr/2026">}}
+{{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Jan/2026">}}
 #### Datasource autocommit verification
 
 Starting with Camunda 7.24.3, 7.23.8, and 7.22.11, the process engine now performs a verification of the default autocommit setting for database connections. This check is enabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will throw an exception during initialization.
@@ -95,6 +95,57 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
   </bean>
 </beans>
 ```
+
+
+#### Additional Validation for Authorization Resources (**7.24.3** only)
+
+Starting with 7.24.3 release, the process engine performs **additional validation when creating authorizations**.
+
+A configuration flag `validateAuthResourceIdExists` is enabled by default.  
+When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
+
+* Null or empty user IDs
+* Null or empty group IDs
+* Invalid or inconsistent references depending on the authorization resource type
+
+This change improves data consistency by preventing invalid authorization entries from being persisted.
+
+##### Impact
+
+Applications that create authorization entries with incomplete or invalid references may now encounter failures during save operations (for example, resulting in a `ProcessEngineException`).
+
+This can affect in particular:
+
+* Custom identity provider integrations
+* Direct or low-level usage of the `AuthorizationService`
+* Bootstrap or migration scripts that manually create authorization data
+
+##### Migration Notes
+
+We recommend reviewing custom authorization creation logic and ensuring that all required references are properly populated before saving authorizations.
+
+If required, the additional validation can be disabled to restore the legacy behavior via process engine configuration:
+
+```xml
+<property name="validateAuthResourceIdExists">false</property>
+```
+
+or programmatically via the Java API:
+
+```java
+processEngineConfiguration.setValidateAuthResourceIdExists(false);
+```
+
+For Spring Boot applications, you can configure it via `application.yml`:
+
+```yaml
+camunda:
+  bpm:
+    authorization:
+      validate-auth-resource-id-exists: false
+```
+
+{{< /details >}}
 
 {{< details left="7.24.2 / 7.23.7 / 7.22.10" right="Nov/2025">}}
 #### Downsized WildFly distribution

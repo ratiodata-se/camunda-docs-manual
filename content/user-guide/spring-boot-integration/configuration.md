@@ -121,6 +121,12 @@ The resource pattern can be changed using properties (see [properties](#camunda-
 
 Applies the authorization configuration to the process engine. If not configured, the `camunda` default values are used (see [properties](#camunda-engine-properties)).
 
+
+{{< note title="" class="info" >}}
+  Starting with **Camunda 7.24.3**, the engine validates authorization references by default (see `camunda.bpm.authorization.validate-auth-resource-id-exists` below).
+{{< /note >}}
+
+
 ## Overriding the Default Configuration
 
 Provide a bean implementing one of the marker interfaces. For example to customize the datasource configuration:
@@ -784,9 +790,9 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 <td><code>false</code></td>
 </tr>
 
-<tr><td colspan="4"><b>Authorization</b></td></tr>
+<tr><td colspan="5"><b>Authorization</b></td></tr>
 <tr>
-<td rowspan="4"><code>camunda.bpm.authorization</code></td>
+<td rowspan="5"><code>camunda.bpm.authorization</code></td>
 <td><code>.enabled</code></td>
 <td>Enables authorization</td>
 <td><i>Camunda default value</i></td>
@@ -807,6 +813,16 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 <tr>
 <td><code>.tenant-check-enabled</code></td>
 <td>Performs tenant checks to ensure that an authenticated user can only access data that belongs to one of his tenants.</td>
+<td><code>true</code></td>
+</tr>
+
+
+<tr>
+<td><code>.validate-auth-resource-id-exists</code></td>
+<td>
+Enables validation of authorization references when authorizations are persisted (users, groups, and resource references).
+This validation is performed independently of whether authorization checks are enabled.
+</td>
 <td><code>true</code></td>
 </tr>
 
@@ -908,6 +924,18 @@ camunda.bpm:
   filter:
     create: All tasks
 ```
+
+
+Configure authorization validation via exposed properties:
+
+```yaml
+camunda:
+  bpm:
+    authorization:
+      enabled: true
+      validate-auth-resource-id-exists: true
+```
+
 Override configuration using generic properties:
 
 ```yaml
