@@ -101,7 +101,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 Starting with 7.24.3 release, the process engine performs **additional validation when creating authorizations**.
 
-A configuration flag `validateReferences` is enabled by default.  
+A configuration flag `validateAuthResourceIdExists` is enabled by default.  
 When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
 
 * Null or empty user IDs
@@ -127,13 +127,13 @@ We recommend reviewing custom authorization creation logic and ensuring that all
 If required, the additional validation can be disabled to restore the legacy behavior via process engine configuration:
 
 ```xml
-<property name="validateReferences">false</property>
+<property name="validateAuthResourceIdExists">false</property>
 ```
 
 or programmatically via the Java API:
 
 ```java
-processEngineConfiguration.setValidateReferences(false);
+processEngineConfiguration.setValidateAuthResourceIdExists(false);
 ```
 
 For Spring Boot applications, you can configure it via `application.yml`:
@@ -142,7 +142,7 @@ For Spring Boot applications, you can configure it via `application.yml`:
 camunda:
   bpm:
     authorization:
-      validate-references: false
+      validate-auth-resource-id-exists: false
 ```
 
 {{< /details >}}

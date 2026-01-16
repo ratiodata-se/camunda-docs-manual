@@ -131,7 +131,7 @@ To prevent invalid or inconsistent authorization data, the process engine can
 validate all referenced entities when authorizations are persisted.
 
 This behavior can be enabled via the process engine configuration property
-`validateReferences`.
+`validateAuthResourceIdExists`.
 
 When enabled, the engine ensures that:
 

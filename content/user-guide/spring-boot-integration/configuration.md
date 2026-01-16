@@ -123,7 +123,7 @@ Applies the authorization configuration to the process engine. If not configured
 
 
 {{< note title="" class="info" >}}
-  Starting with **Camunda 7.24.3**, the engine validates authorization references by default (see `camunda.bpm.authorization.validate-references` below).
+  Starting with **Camunda 7.24.3**, the engine validates authorization references by default (see `camunda.bpm.authorization.validate-auth-resource-id-exists` below).
 {{< /note >}}
 
 
@@ -818,7 +818,7 @@ When setting to <code>/</code>, the legacy behavior of Camunda Spring Boot Start
 
 
 <tr>
-<td><code>.validate-references</code></td>
+<td><code>.validate-auth-resource-id-exists</code></td>
 <td>
 Enables validation of authorization references when authorizations are persisted (users, groups, and resource references).
 This validation is performed independently of whether authorization checks are enabled.
@@ -933,7 +933,7 @@ camunda:
   bpm:
     authorization:
       enabled: true
-      validate-references: true
+      validate-auth-resource-id-exists: true
 ```
 
 Override configuration using generic properties:

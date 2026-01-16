@@ -239,7 +239,7 @@ The following is a list with the most commonly used process engine configuration
   </tr>
 
   <tr>
-    <td><code>validateReferences</code></td>
+    <td><code>validateAuthResourceIdExists</code></td>
     <td>Boolean</td>
     <td>
       Enables validation of referenced entities when authorizations are persisted.
