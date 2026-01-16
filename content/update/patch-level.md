@@ -26,7 +26,7 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
-{{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Apr/2026">}}
+{{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Jan/2026">}}
 #### Datasource autocommit verification
 
 Starting with Camunda 7.24.3, 7.23.8, and 7.22.11, the process engine now performs a verification of the default autocommit setting for database connections. This check is enabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will throw an exception during initialization.
@@ -97,9 +97,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 ```
 
 
-#### Additional Validation for Authorization Resources
+#### Additional Validation for Authorization Resources (**7.24.3** only)
 
-Starting with this patch release, the process engine performs **additional validation when creating authorizations**.
+Starting with 7.24.3 release, the process engine performs **additional validation when creating authorizations**.
 
 A configuration flag `validateReferences` is enabled by default.  
 When set to `true`, the engine validates references of authorization resources before persisting them. This includes checks for:
