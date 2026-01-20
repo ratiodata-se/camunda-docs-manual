@@ -16,7 +16,7 @@ To enable the [Web Applications]({{<ref "/webapps/_index.md">}}) you can use the
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-webapp</artifactId>
   <version>{project-version}</version>
 </dependency>
 ```
@@ -34,7 +34,7 @@ To use the enterprise Web applications, include another starter:
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-webapp-ee</artifactId>
   <version>${project-version}</version>
 </dependency>
 ```

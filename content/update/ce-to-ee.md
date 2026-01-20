@@ -52,7 +52,7 @@ To officially begin migrating from Camunda 7 Community Edition to the Enterprise
     <dependency>
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-bom</artifactId>
-      <version>7.15.0-ee</version>
+      <version>{{< minor-version >}}.0-ee</version>
       <scope>import</scope>
       <type>pom</type>
     </dependency>
@@ -62,14 +62,14 @@ To officially begin migrating from Camunda 7 Community Edition to the Enterprise
     <dependencies>
       <dependency>
         <groupId>org.camunda.bpm.springboot</groupId>
-        <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-        <version>7.15.0-ee</version>
+        <artifactId>camunda-bpm-spring-boot-starter-4-rest</artifactId>
+        <version>{{< minor-version >}}.0-ee</version>
       </dependency>
     
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
-      <version>7.15.0-ee</version>
+      <artifactId>camunda-bpm-spring-boot-starter-4-webapp-ee</artifactId>
+      <version>{{< minor-version >}}.0-ee</version>
     </dependency>
     ```
 5. We need to tell it where to find these new dependencies. Therefore, we’ll add the locations of the repositories at the end of the dependencies in the `pom.xml` file as follows:

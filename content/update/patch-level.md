@@ -27,6 +27,125 @@ Between patch levels, the structure of the database schema is not changed. The d
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
 {{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Jan/2026">}}
+#### Camunda Run (**7.24.3** only)
+
+Camunda Run now uses the Spring Boot 4 starter artifacts internally. If you have customized Camunda Run, please review your custom code or configuration carefully.
+Consult the [Spring Boot 3.x to 4.0 Migration Guide](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide) for any breaking changes that may affect your custom code.
+
+#### Spring Boot Starter 4 Support (**7.24.3** only)
+
+Starting with Camunda 7.24.3, we additionally provide Spring Boot Starter 4 artifacts while ensuring compatibility with both Spring Boot 3 and Spring Boot 4. The original artifacts continue to target **Spring Boot 3**, while new artifacts with the `-4` suffix have been introduced for **Spring Boot 4** compatibility.
+
+The following table shows all Spring Boot 3 and 4 artifacts and how they map to each other:
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Spring Boot 3 Artifact</th>
+      <th>New Spring Boot 4 Artifact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter</td>
+      <td>camunda-bpm-spring-boot-starter-4</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-rest</td>
+      <td>camunda-bpm-spring-boot-starter-4-rest</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-webapp</td>
+      <td>camunda-bpm-spring-boot-starter-4-webapp</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-webapp-core</td>
+      <td>camunda-bpm-spring-boot-starter-4-webapp-core</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-security</td>
+      <td>camunda-bpm-spring-boot-starter-4-security</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-test</td>
+      <td>camunda-bpm-spring-boot-starter-4-test</td>
+    </tr>
+    <tr>
+      <td>camunda-bpm-spring-boot-starter-external-task-client</td>
+      <td>camunda-bpm-spring-boot-starter-4-external-task-client</td>
+    </tr>
+  </tbody>
+</table>
+
+##### Migration for Spring Boot 4 Users
+
+If you are upgrading to **Spring Boot 4**, you need to update your Maven or Gradle dependencies to use the new artifact names with the `-4` suffix.
+
+**Maven Example:**
+
+```xml
+<!-- Before -->
+<dependency>
+    <groupId>org.camunda.bpm.springboot</groupId>
+    <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+    <version>7.24.3-ee</version>
+</dependency>
+
+<!-- After (Spring Boot 4) -->
+<dependency>
+    <groupId>org.camunda.bpm.springboot</groupId>
+    <artifactId>camunda-bpm-spring-boot-starter-4</artifactId>
+    <version>7.24.3-ee</version>
+</dependency>
+```
+
+##### Migration for Spring Boot 3 Users
+
+If you continue to use **Spring Boot 3**, you can continue using the original artifact names without the `-4` suffix. These artifacts remain compatible with Spring Boot 3.
+
+**Maven Example:**
+
+```xml
+<!-- Spring Boot 3 - no change required -->
+<dependency>
+    <groupId>org.camunda.bpm.springboot</groupId>
+    <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+    <version>7.24.3-ee</version>
+</dependency>
+```
+
+#### External Task Client Spring Dependency (**7.24.3** only)
+
+Starting with Camunda 7.24.3, the `camunda-external-task-client-spring` artifact now depends on **Spring Framework 7** by default. This aligns with the Spring Boot 4 upgrade.
+
+##### Using with Spring 6
+
+If you need to continue using Spring Framework 6, you can override the Spring dependency in your project:
+
+**Maven Example:**
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-framework-bom</artifactId>
+            <version>6.2.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-external-task-client-spring</artifactId>
+        <version>7.24.3-ee</version>
+    </dependency>
+</dependencies>
+```
+
 #### Datasource autocommit verification
 
 Starting with Camunda 7.24.3, 7.23.8, and 7.22.11, the process engine now performs a verification of the default autocommit setting for database connections. This check is enabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will throw an exception during initialization.

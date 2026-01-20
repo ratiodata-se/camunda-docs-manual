@@ -17,10 +17,16 @@ your `pom.xml` file:
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-external-task-client</artifactId>
   <version>{{< minor-version >}}.0</version>
 </dependency>
 ```
+
+{{< note title="Spring Boot 4 Support" class="info" >}}
+The above example shows the Spring Boot 4 artifact (`camunda-bpm-spring-boot-starter-4-external-task-client`), available starting with version 7.24.3.
+If you are using Spring Boot 3, use `camunda-bpm-spring-boot-starter-external-task-client` instead.
+See [Patch Level Update Guide]({{< ref "/update/patch-level.md#spring-boot-starter-4-support-7-24-3-only" >}}) for details.
+{{< /note >}}
 
 Please check out our [External Task Client Spring Boot Starter Examples](https://github.com/camunda/camunda-bpm-examples/tree/{{<minor-version>}}#external-task-client-spring-boot).
 
@@ -615,6 +621,13 @@ to your `pom.xml` file:
   <version>{{< minor-version >}}.0</version>
 </dependency>
 ```
+
+{{< note title="Spring Framework 7 Dependency" class="info" >}}
+Starting with version 7.24.3, this artifact depends on Spring Framework 7 by default.
+If you need to continue using Spring Framework 6, you can override the Spring dependency 
+in your project using the `spring-framework-bom`. See the [Patch Level Update Guide]({{< ref "/update/patch-level.md#using-with-spring-6" >}}) 
+for details on how to configure this.
+{{< /note >}}
 
 To bootstrap the Client, use the class annotation `@EnableExternalTaskClient`. You can find all
 configuration attributes in the 

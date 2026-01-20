@@ -28,7 +28,7 @@ In order to enable the Spring Security OAuth2 integration in Spring Boot, add th
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-security</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-security</artifactId>
 </dependency>
 ```
 

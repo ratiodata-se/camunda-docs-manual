@@ -191,6 +191,11 @@ Camunda Run is based on the [Camunda Spring Boot Starter](https://github.com/cam
 All [configuration properties]({{< ref "/user-guide/spring-boot-integration/configuration.md#camunda-engine-properties" >}}) from the camunda-spring-boot-starter are available to customize Camunda Run.
 {{< /note >}}
 
+{{< note title="Spring Boot 4" class="info" >}}
+Starting with Camunda 7.24.3, Camunda Run is based on **Spring Boot 4**. 
+See the [Patch Level Update Guide]({{< ref "/update/patch-level.md#camunda-run-7-24-3-only" >}}).
+{{< /note >}}
+
 ## Database
 
 The distro comes with a file-based h2 database for testing. It is recommended to connect to a standalone database system for use in production.

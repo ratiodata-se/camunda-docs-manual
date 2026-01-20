@@ -29,6 +29,12 @@ To enable Camunda 7 auto configuration, add the following dependency to your ```
 
 This will add the Camunda engine v.{{< minor-version >}}.0 to your dependencies.
 
+{{< note title="Spring Boot 4 Support" class="info" >}}
+Starting with version 7.24.3, Camunda provides separate artifacts for Spring Boot 4. 
+If you are using Spring Boot 4, use the `-4` suffix artifacts (e.g., `camunda-bpm-spring-boot-starter-4`).
+See [Patch Level Update Guide]({{< ref "/update/patch-level.md#spring-boot-starter-4-support-7-24-3-only" >}}) for details.
+{{< /note >}}
+
 Other starters that can be used are: 
 
 * [`camunda-bpm-spring-boot-starter-rest`](rest-api)
@@ -42,7 +48,7 @@ To use Camunda Spring Boot Starter with Camunda EE you need to define the EE ver
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-webapp-ee</artifactId>
   <version>{{< minor-version >}}.0-ee</version>
 </dependency>
 ```

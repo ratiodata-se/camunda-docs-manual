@@ -68,7 +68,7 @@ application must use the **`camunda-bpm-spring-boot-starter-webapp-ee`** module.
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-webapp-ee</artifactId>
 </dependency>
 ```
 

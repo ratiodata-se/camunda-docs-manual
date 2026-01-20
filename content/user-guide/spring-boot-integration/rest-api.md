@@ -16,7 +16,7 @@ To enable the [REST API]({{< ref "/reference/rest/_index.md">}}) you can use the
 ```xml
 <dependency>
   <groupId>org.camunda.bpm.springboot</groupId>
-  <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+  <artifactId>camunda-bpm-spring-boot-starter-4-rest</artifactId>
   <version>{project-version}</version>
 </dependency>
 ```
