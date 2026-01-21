@@ -85,6 +85,7 @@ To configure a JDBC Resource you have to edit the file `$TOMCAT_HOME/conf/server
               driverClassName="org.h2.Driver"
               url="jdbc:h2:./camunda-h2-dbs/process-engine;TRACE_LEVEL_FILE=0"
               defaultTransactionIsolation="READ_COMMITTED"
+              defaultAutoCommit="false"
               username="sa"
               password="sa"
               maxActive="20"

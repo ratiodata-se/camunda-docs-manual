@@ -146,15 +146,13 @@ If you need to continue using Spring Framework 6, you can override the Spring de
 </dependencies>
 ```
 
-#### Datasource autocommit verification
+#### Datasource autocommit verification (**7.24.3** only)
 
-Starting with Camunda 7.24.3, 7.23.8, and 7.22.11, the process engine now performs a verification of the default autocommit setting for database connections. This check is enabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will throw an exception during initialization.
+Starting with Camunda 7.24.3 the process engine now performs a verification of the default autocommit setting for database connections. This check is disabled by default. If your datasource is configured with `defaultAutoCommit` set to `true`, the process engine will log a warning during initialization.
 
-Camunda is designed to operate in a transactional mode. Misconfiguring a datasource with autocommit enabled is known to cause data inconsistency, deadlocks, and unexpected runtime behavior. This verification ensures environment stability by preventing the engine from starting in an unsupported state.
+##### Changes in Spring-based configuration
 
-##### Changes in configuring
-
-Below is an example of configuration with separate datasource bean with `defaultAutoCommit` property set to `false`:
+Below is an example of Spring-based configuration of datasource bean with `defaultAutoCommit` property set to `false`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -178,43 +176,19 @@ Below is an example of configuration with separate datasource bean with `default
 </beans>
 ```
 
-If you do not define a separate datasource bean and instead allow `ProcessEngineConfiguration` to initialize the connection directly using jdbcUrl, no action is required. In this scenario, Camunda internally forces `defaultAutoCommit` to `false`.
+##### Spring Boot Starter & Camunda Run configuration changes
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+For Camunda Run distribution, make sure you update default.yml and production.yml, located in `/configuration` directory, with `auto-commit` set to `false` for hikari pool setting and for Spring Boot Starter, update your `application.yml` file as follows:
 
-  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
-    <property name="jdbcDriver" value="org.h2.Driver"/>
-    <property name="jdbcUrl" value="jdbc:h2:mem:camunda-autocommit;DB_CLOSE_DELAY=-1"/>
-    <property name="jdbcUsername" value="sa"/>
-    <property name="jdbcPassword" value=""/>
-    <property name="databaseSchemaUpdate" value="true"/>
-    <property name="skipAutoCommitCheck" value="false"/>
-    <property name="jobExecutorActivate" value="false"/>
-  </bean>
-</beans>
+```yaml
+spring.datasource:
+  url: jdbc:h2:./camunda-h2-default/process-engine;TRACE_LEVEL_FILE=0;DB_CLOSE_ON_EXIT=FALSE
+  driver-class-name: org.h2.Driver
+  username: sa
+  password: sa
+  hikari:
+    auto-commit: false
 ```
-
-If you cannot immediately modify your datasource configuration, you can temporarily bypass the exception using the `skipAutoCommitCheck` property. While this prevents the engine from failing at startup, a warning will still be logged.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
-    <property name="dataSource" ref="camundaDataSource"/>
-    <property name="databaseSchemaUpdate" value="true"/>
-    <property name="jobExecutorActivate" value="false"/>
-    <property name="skipAutoCommitCheck" value="true"/>
-  </bean>
-</beans>
-```
-
 
 #### Additional Validation for Authorization Resources (**7.24.3** only)
 
