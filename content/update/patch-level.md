@@ -29,7 +29,7 @@ This section describes noteworthy potentially breaking changes when you update t
 {{< details left="7.22.12" right="Feb/2026">}}
 #### Camunda Run: Spring Boot 3.5 Upgrade
 
-Camunda Run is now based on Spring Boot 3.5.11, upgrading from Spring Boot 3.4.11 to provide the latest security updates and improvements.
+Camunda Run is now based on Spring Boot 3.5, upgrading from Spring Boot 3.4 to provide the latest security updates and improvements.
 
 ##### Migration Steps
 
@@ -47,7 +47,6 @@ We expect **no migration to be needed** for most users, as this upgrade primaril
 
 For detailed information about Spring Boot 3.5 changes, refer to the release notes:
 
-* [Spring Boot 3.4 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes).
 * [Spring Boot 3.5 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.5-Release-Notes).
   {{< /details >}}
 
