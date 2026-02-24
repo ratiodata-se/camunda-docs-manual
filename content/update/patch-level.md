@@ -26,6 +26,30 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
+{{< details left="7.22.12" right="Feb/2026">}}
+#### Camunda Run: Spring Boot 3.5 Upgrade
+
+Camunda Run is now based on Spring Boot 3.5, upgrading from Spring Boot 3.4 to provide the latest security updates and improvements.
+
+##### Migration Steps
+
+For standard Camunda Run usage, **no action is required** beyond upgrading to version 7.22.12.
+
+For custom Spring Boot configurations:
+
+1. **Review Custom Configuration**: If you have applied custom Spring Boot-specific configuration to your `application.yml` or `application.properties`, ensure compatibility with Spring Boot 3.5
+2. **Update Dependencies**: If you have added custom Spring Boot dependencies, verify they are compatible with Spring Boot 3.5
+3. **Test Your Setup**: Verify that your Camunda Run instance starts and functions correctly after the upgrade
+
+##### Expected Impact
+
+We expect **no migration to be needed** for most users, as this upgrade primarily addresses security updates and dependency maintenance. The Spring Boot configuration interface remains largely compatible between versions 3.4 and 3.5.
+
+For detailed information about Spring Boot 3.5 changes, refer to the release notes:
+
+* [Spring Boot 3.5 Release Notes](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.5-Release-Notes).
+  {{< /details >}}
+
 {{< details left="7.24.3 / 7.23.8 / 7.22.11" right="Jan/2026">}}
 #### Camunda Run (**7.24.3** only)
 
