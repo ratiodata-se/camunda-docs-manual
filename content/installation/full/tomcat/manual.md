@@ -15,11 +15,13 @@ menu:
 
 This section describes how you can install Camunda 7 and its components on a vanilla [Apache Tomcat](http://tomcat.apache.org/), if you are not able to use the pre-packaged Tomcat distribution. In addition, download a [Tomcat distribution](https://downloads.camunda.cloud/release/camunda-bpm/tomcat/) or [Enterprise Edition Tomcat distribution](https://downloads.camunda.cloud/enterprise-release/camunda-bpm/tomcat/) to fetch the required Camunda modules.
 
+Camunda 7 supports running on both Tomcat 10 and Tomcat 11. Unless stated otherwise, the examples and configuration snippets in this guide apply to both versions. The default and recommended version is **Tomcat 11**.
+
 {{< note title="Reading the Guide" class="info" >}}
 Throughout this guide we will use a number of variables to denote common path names and constants:
 
-* `$TOMCAT_HOME` points to the main directory of the tomcat server.
-* `$TOMCAT_VERSION` denotes the version of Tomcat server.
+* `$TOMCAT_HOME` points to the main directory of the Tomcat server.
+* `$TOMCAT_VERSION` denotes the version of Tomcat server (10.x or 11.x).
 * `$PLATFORM_VERSION` denotes the version of Camunda 7 you want to install or already have installed, e.g. `7.0.0`.
 * `$TOMCAT_DISTRIBUTION` represents the downloaded pre-packaged Camunda 7 distribution for Tomcat, e.g. `camunda-bpm-tomcat-$PLATFORM_VERSION.zip` or `camunda-bpm-tomcat-$PLATFORM_VERSION.tar.gz`.
 
@@ -96,7 +98,8 @@ To configure a JDBC Resource you have to edit the file `$TOMCAT_HOME/conf/server
 ```
 
 For more information on the creation of JDBC datasources have a look at the documentation of your Tomcat version:
-[10.1](https://tomcat.apache.org/tomcat-10.1-doc/jndi-datasource-examples-howto.html).
+[Tomcat 11](https://tomcat.apache.org/tomcat-11.0-doc/jndi-datasource-examples-howto.html),
+[Tomcat 10](https://tomcat.apache.org/tomcat-10.1-doc/jndi-datasource-examples-howto.html).
 
 
 ## Add Camunda Services
@@ -159,7 +162,8 @@ You have to add the file `bpm-platform.xml` to the folder `$TOMCAT_HOME/conf` or
 ## Secure Tomcat
 
 Follow the Tomcat Security Howto of your Tomcat version:
-[10.1](https://tomcat.apache.org/tomcat-10.1-doc/security-howto.html).
+[Tomcat 11](https://tomcat.apache.org/tomcat-11.0-doc/security-howto.html),
+[Tomcat 10](https://tomcat.apache.org/tomcat-10.1-doc/security-howto.html).
 
 In particular, go to `${TOMCAT_HOME}/webapps/` and remove the directories
 `ROOT`, `docs`, `examples`, `manager` and `host-manager`.

@@ -26,6 +26,26 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
+{{< details left="7.24.6" right="Mar/2026">}}
+
+#### Added Support for Tomcat 11
+
+This version supports all the necessary building-block modules for our users to use `camunda-bpm-platform`  enterprise edition in conjunction with both `Tomcat 10.1` and `Tomcat 11.0`.
+The default version is `Tomcat 11.0`, the pre-packaged distribution and the docker image, now use `Tomcat 11.0` version.
+
+{{< note title="Using Camunda 7 with Tomcat 10 on Java 11" class="warning" >}}
+The Camunda engine artifact declares a provided dependency on org.apache.tomcat:tomcat-catalina . 
+Release artifacts is built on Java 17, this resolves to Tomcat 11.0, which itself requires Java 17. 
+This does not mean that the engine requires Tomcat 11 or Java 17 at runtime: Tomcat is not packaged with the engine 
+and is expected to be supplied by the application server. 
+For Java 11 deployments you can continue to run the engine on a Java 11 compatible container such as Tomcat 10.1,  
+this combination is supported and has been tested.
+{{< /note >}}
+
+For detailed information about Tomcat 11 changes, refer to the [Tomcat 11 migration guide](https://tomcat.apache.org/migration-11.0.html).
+
+{{< /details >}}
+
 {{< details left="7.22.12" right="Feb/2026">}}
 #### Camunda Run: Spring Boot 3.5 Upgrade
 

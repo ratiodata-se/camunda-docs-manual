@@ -433,6 +433,12 @@ Please find below external documentation on how to configure your application se
         * [Error Reporter Valve](https://tomcat.apache.org/tomcat-10.1-doc/config/valve.html#Error_Report_Valve)
     * Alternative Resources
         * [Securing Tomcat](https://wiki.owasp.org/index.php/Securing_tomcat)
+* Tomcat 11.0+
+    * Official Documentation
+        * [Security Considerations](https://tomcat.apache.org/tomcat-11.0-doc/security-howto.html#Valves)
+        * [Error Reporter Valve](https://tomcat.apache.org/tomcat-11.0-doc/config/valve.html#Error_Report_Valve)
+    * Alternative Resources
+        * [Securing Tomcat](https://wiki.owasp.org/index.php/Securing_tomcat)
 * Wildfly 33.0+: Official Documentation
     * [Servlet Container Configuration](https://docs.jboss.org/author/display/WFLY/Undertow%20subsystem%20configuration.html#108626010_Undertowsubsystemconfiguration-Servletcontainerconfiguration)
     * [Model Reference](https://docs.wildfly.org/33/wildscribe/subsystem/undertow/servlet-container/index.html#attr-stack-trace-on-error)
