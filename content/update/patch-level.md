@@ -26,7 +26,7 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
-{{< details left="7.24.6" right="Mar/2026">}}
+{{< details left="7.24.6" right="Apr/2026">}}
 
 #### Added Support for Tomcat 11
 
