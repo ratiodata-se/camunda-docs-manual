@@ -44,6 +44,15 @@ this combination is supported and has been tested.
 
 For detailed information about Tomcat 11 changes, refer to the [Tomcat 11 migration guide](https://tomcat.apache.org/migration-11.0.html).
 
+#### Added Support for WildFly 39
+
+Starting with Camunda 7.24.6, we provide support for `WildFly Application Server 39`. It replaces WildFly 37 in our pre-configured distributions and Docker images.
+
+##### Additional Resources
+
+* [WildFly Manual Installation Guide]({{< ref "/installation/full/jboss/manual.md" >}})
+* [WildFly Configuration Guide]({{< ref "/installation/full/jboss/configuration.md" >}})
+
 {{< /details >}}
 
 {{< details left="7.22.12" right="Feb/2026">}}
