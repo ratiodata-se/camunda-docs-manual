@@ -28,6 +28,18 @@ This section describes noteworthy potentially breaking changes when you update t
 
 {{< details left="7.24.6" right="Apr/2026">}}
 
+####  Added Support for Spring Framework 7
+
+As of **Camunda 7.24.6**, the `camunda-engine-spring` artifact is compiled and tested against **Spring Framework 7** by default.  
+
+* The `camunda-engine-spring-6` artifact has been removed.  
+* Use `camunda-engine-spring` for both **Spring 6** and **Spring 7**.
+
+For configuration and usage of **Spring Framework 6 or 7**, refer to the  
+[Spring Framework Integration guide]({{< ref "/user-guide/spring-framework-integration/_index.md#using-camunda-engine-spring-with-spring-6-or-7" >}}).
+
+For detailed information about Spring Framework 7 changes, refer to the [Spring Framework 7.0 Release Notes](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-7.0-Release-Notes).
+
 #### Added Support for Tomcat 11
 
 This version supports all the necessary building-block modules for our users to use `camunda-bpm-platform`  enterprise edition in conjunction with both `Tomcat 10.1` and `Tomcat 11.0`.
@@ -52,6 +64,7 @@ Starting with Camunda 7.24.6, we provide support for `WildFly Application Server
 
 * [WildFly Manual Installation Guide]({{< ref "/installation/full/jboss/manual.md" >}})
 * [WildFly Configuration Guide]({{< ref "/installation/full/jboss/configuration.md" >}})
+
 
 {{< /details >}}
 
