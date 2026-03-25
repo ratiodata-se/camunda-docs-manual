@@ -65,6 +65,9 @@ Starting with Camunda 7.24.6, we provide support for `WildFly Application Server
 * [WildFly Manual Installation Guide]({{< ref "/installation/full/jboss/manual.md" >}})
 * [WildFly Configuration Guide]({{< ref "/installation/full/jboss/configuration.md" >}})
 
+#### Quarkus 3.33 Support
+
+Starting with Camunda 7.24.6, the Camunda Quarkus extension supports [Quarkus 3.33](https://github.com/quarkusio/quarkus).
 
 {{< /details >}}
 

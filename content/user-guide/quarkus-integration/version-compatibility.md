@@ -51,6 +51,10 @@ Only these default combinations are recommended (and supported) by Camunda.
     <td>7.24.x</td>
     <td>3.27.x</td>
   </tr>
+  <tr>
+    <td>7.24.6+</td>
+    <td>3.33.x</td>
+  </tr>
 </table>
 
 In case a certain Quarkus version has a bug, you can override the existing Quarkus version by adding the following
