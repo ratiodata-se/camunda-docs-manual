@@ -1428,3 +1428,56 @@ These parameters define the log level for the specified log entries.
     </td>
   </tr>
 </table>
+
+## Query expression allow-list parameters
+
+These parameters control the expression allow-list feature for query API expressions (e.g., `taskAssigneeExpression`, `dueAfterExpression`).
+When enabled, only explicitly permitted EL functions, method calls, property accesses, and bean references may be used in query expressions.
+
+<table class="table table-striped">
+  <tr id="queryExpressionAllowListEnabled">
+    <td><code>queryExpressionAllowListEnabled</code></td>
+    <td>Boolean</td>
+    <td>
+      Enables or disables the expression allow-list for query API expressions. Default value: <code>true</code>.<br/>
+      When <code>true</code>, only explicitly permitted EL functions, method calls, property accesses, and bean references
+      are allowed in query expressions. Setting this to <code>false</code> disables all allow-list enforcement (not recommended).
+    </td>
+  </tr>
+  <tr id="allowedExpressionFunctionsInQueries">
+    <td><code>allowedExpressionFunctionsInQueries</code></td>
+    <td>String</td>
+    <td>
+      A comma-separated list of additional EL function names (and chained method names) permitted in query expressions,
+      beyond the built-in defaults (<code>now</code>, <code>dateTime</code>, <code>currentUser</code>, <code>currentUserGroups</code>,
+      and the Joda-Time <code>DateTime</code> arithmetic methods). Default value: <code>null</code> (no extras beyond built-ins).<br/>
+      Example: <code>myCustomFunc,anotherFunc</code>
+    </td>
+  </tr>
+  <tr id="allowedExpressionBeansInQueries">
+    <td><code>allowedExpressionBeansInQueries</code></td>
+    <td>String</td>
+    <td>
+      A comma-separated list of bean names that may be referenced in query expressions.
+      By default, no beans are accessible. Example: <code>currentUserBean,dateHelper</code>
+    </td>
+  </tr>
+  <tr id="allowedExpressionPropertiesInQueries">
+    <td><code>allowedExpressionPropertiesInQueries</code></td>
+    <td>String</td>
+    <td>
+      A comma-separated list of dot-notation property names permitted in query expressions.
+      By default, no property access is allowed (e.g., <code>${someBean.name}</code> is blocked).
+      Example: <code>name,id</code>
+    </td>
+  </tr>
+  <tr id="queryExpressionValidator">
+    <td><code>queryExpressionValidator</code></td>
+    <td>Object</td>
+    <td>
+      A custom implementation of <code>QueryExpressionValidator</code> that replaces the built-in allow-list logic.
+      Can only be set programmatically via <code>ProcessEngineConfigurationImpl#setQueryExpressionValidator</code>.
+      Use this for advanced use cases, such as when a custom <code>ExpressionManager</code> evaluates a different EL dialect.
+    </td>
+  </tr>
+</table>

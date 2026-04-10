@@ -252,6 +252,40 @@ If you don't want to display form previews and execute the embedded scripts in C
 Consider disabling execution of expressions in queries. See also: [Custom Code & Security
 ]({{< ref "/user-guide/process-engine/securing-custom-code.md" >}})
 
+#### Expression Allow-List for Query API
+
+The process engine enforces an **expression allow-list** for query API expressions (e.g., `taskAssigneeExpression`, `dueAfterExpression`). This feature is **enabled by default** and restricts which EL functions, chained methods, bean references, and property accesses are permitted inside query expressions before they are evaluated.
+
+{{< note title="Security Risk: Remote Code Execution via Query Expressions" class="warning" >}}
+Query expressions that reference arbitrary beans or methods can be exploited to achieve **remote code execution (RCE)** if an attacker controls the expression input. Before adding any function, method, bean name, or property to the allow-list, carefully review whether it — or any object reachable through it — can be used to execute arbitrary code, access sensitive resources, or perform unintended side effects.
+
+Common attack vectors to consider:
+
+* Beans with methods that invoke OS commands, make network calls, or load classes (e.g., reflection-based utilities)
+* Chained method calls that can traverse to dangerous APIs (e.g., `getClass().getClassLoader()`)
+* Property accesses on beans that expose mutable state or internal engine structures
+{{< /note >}}
+
+**Built-in safe defaults** — the following are permitted without any configuration:
+
+| Function / Method | Description |
+|---|---|
+| `now()` | Current date/time as `java.util.Date` |
+| `dateTime()` | Joda-Time `DateTime` for date arithmetic |
+| `currentUser()` | ID of the authenticated user |
+| `currentUserGroups()` | Group list of the authenticated user |
+| Joda-Time `DateTime` arithmetic methods | `plusDays`, `minusDays`, `withTimeAtStartOfDay`, `toDate`, etc. |
+
+**Extending the allow-list** — use these properties in the [process engine configuration]({{< ref "/reference/deployment-descriptors/tags/process-engine.md#queryExpressionAllowListEnabled" >}}) only after a thorough security review:
+
+* `allowedExpressionFunctionsInQueries` — additional EL function or chained method names (comma-separated)
+* `allowedExpressionBeansInQueries` — bean names accessible in query expressions (none by default)
+* `allowedExpressionPropertiesInQueries` — dot-notation property names accessible in query expressions (none by default)
+
+To disable allow-list enforcement entirely (strongly discouraged in production), set `queryExpressionAllowListEnabled` to `false`.
+
+For advanced use cases, a custom `QueryExpressionValidator` can be injected programmatically — for example, when using a non-JUEL expression manager. Ensure any custom validator upholds equivalent or stricter security guarantees than the built-in one.
+
 ### Native queries
 
 One of the options to query data from the engine is using native queries. Which means to provide own SQL queries to retrieve engine entities if the Query API lacks the possibilities you need.

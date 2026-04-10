@@ -26,6 +26,152 @@ Between patch levels, the structure of the database schema is not changed. The d
 
 This section describes noteworthy potentially breaking changes when you update to the respective patch levels.
 
+{{< details left="7.24.7 / 7.23.12 / 7.22.15" right="Apr/2026">}}
+
+#### Expression Allow-List for Query API
+
+The process engine enforces an **expression allow-list** for query API expressions.
+Expressions in queries are supported in two places:
+
+* **Saved Tasklist filters** – when a filter stores a `TaskQuery` that uses expression
+  fields such as `taskAssigneeExpression` or `dueAfterExpression`. These are evaluated
+  each time the filter is applied in the Tasklist web application.
+* **Custom code** – when application code calls the `TaskQuery` API directly with
+  expression fields (ad-hoc queries).
+
+When the allow-list is enabled, only explicitly permitted EL functions, method calls,
+dot-notation property accesses, and bean references may be used in those expressions.
+
+This feature is **enabled by default**. To opt out (not recommended), set
+`queryExpressionAllowListEnabled` to `false`.
+
+##### Upgrade Notice
+
+Because this feature is enabled by default, existing deployments may be affected after
+upgrading. Before going live, we recommend:
+
+1. **Check your Tasklist filters.** Open each saved filter in the Tasklist web application
+   and verify it still returns results as expected. If a filter uses an expression that is
+   not on the default allow-list (e.g. a custom EL function or a bean reference), it will
+   now throw a `BadUserRequestException` when applied.
+
+2. **Review custom TaskQuery code.** Search your application code for any call to a
+   `TaskQuery` method whose name ends in `Expression` (e.g. `taskAssigneeExpression`,
+   `taskOwnerExpression`, `dueAfterExpression`). Verify that every expression used there
+   only references built-in functions or entries you have added to the allow-list.
+
+3. **Extend the allow-list where needed.** If a filter or query uses a custom
+   function or bean, add it to the appropriate configuration property rather than
+   disabling the feature entirely (see *Configuration* below).
+
+##### Configuration
+
+The allow-list is controlled by three optional properties. All three accept a
+comma-separated list of names:
+
+```xml
+<bean id="processEngineConfiguration"
+      class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+
+  <!-- Disable the allow-list entirely (not recommended) -->
+  <!-- <property name="queryExpressionAllowListEnabled" value="false" /> -->
+
+  <!-- Optional: allow EL functions/methods beyond the built-in defaults (see below) -->
+  <property name="allowedExpressionFunctionsInQueries" value="myCustomFunc,anotherFunc" />
+
+  <!-- Optional: allow specific beans to be referenced in query expressions -->
+  <!-- By default, no beans are accessible -->
+  <property name="allowedExpressionBeansInQueries" value="currentUserBean,dateHelper" />
+
+  <!-- Optional: allow specific dot-notation property accesses -->
+  <!-- By default, no property access is allowed (e.g. ${someBean.name} is blocked) -->
+  <property name="allowedExpressionPropertiesInQueries" value="name,id" />
+
+</bean>
+```
+
+##### Default Allow-List
+
+The following functions and methods are permitted without any additional configuration.
+
+**Built-in EL functions:**
+
+| Function | Description |
+|---|---|
+| `now()` | Returns the current date/time as `java.util.Date` |
+| `dateTime()` | Returns a Joda-Time `DateTime` for date arithmetic |
+| `currentUser()` | Returns the ID of the authenticated user |
+| `currentUserGroups()` | Returns the group list of the authenticated user |
+
+**Built-in Joda-Time `DateTime` methods** (chained on `dateTime()` or `now()`):
+
+| Category | Methods |
+|---|---|
+| Add duration | `plusYears`, `plusMonths`, `plusWeeks`, `plusDays`, `plusHours`, `plusMinutes`, `plusSeconds`, `plusMillis` |
+| Subtract duration | `minusYears`, `minusMonths`, `minusWeeks`, `minusDays`, `minusHours`, `minusMinutes`, `minusSeconds`, `minusMillis` |
+| Set fields | `withYear`, `withMonthOfYear`, `withDayOfMonth`, `withDayOfWeek`, `withDayOfYear`, `withHourOfDay`, `withMinuteOfHour`, `withSecondOfMinute`, `withMillisOfSecond`, `withMillis`, `withTimeAtStartOfDay` |
+| Convert | `toDate` |
+
+Example expression using built-in methods:
+
+```
+${dateTime().plusDays(7).withTimeAtStartOfDay().toDate()}
+```
+
+**What is blocked by default:**
+
+* **Unlisted EL functions** — e.g. `${myCustomFunc()}`
+* **Unlisted chained method calls** — e.g. `${dateTime().getClass()}`
+* **Any bean reference** — e.g. `${myBean.value}` (unless the bean name is listed in `allowedExpressionBeansInQueries`)
+* **Any dot-notation property access** — e.g. `${"".class}`, `${task.name}` (unless the property name is listed in `allowedExpressionPropertiesInQueries`)
+* **Bracket-notation method invocations** — e.g. `${obj['method']()}` are always blocked because the method name cannot be statically determined
+
+Bracket-notation indexing for collection access (e.g. `${map['key']}`, `${list[0]}`) is **allowed**.
+
+##### Behavior When Validation Fails
+
+When a query expression references a disallowed function, method, property, or bean, a
+`BadUserRequestException` is thrown:
+
+```
+Expression function 'getClass' is not allowed in query expressions.
+Expression: '${dateTime().getClass()}'.
+Built-in allowed functions: [currentUser, currentUserGroups, dateTime, minusDays, ..., toDate].
+To allow additional functions, configure 'allowedExpressionFunctionsInQueries'
+in ProcessEngineConfiguration.
+```
+
+##### Custom Validator
+
+For advanced use cases a custom implementation of `QueryExpressionValidator` can be injected directly:
+
+```java
+ProcessEngineConfigurationImpl config = (ProcessEngineConfigurationImpl)
+    ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("camunda.cfg.xml");
+
+config.setQueryExpressionValidator(expressionText -> {
+    if (expressionText.contains("myCustomBean")) {
+        throw new BadUserRequestException("myCustomBean is not permitted in queries");
+    }
+});
+```
+
+{{< note title="Query Expression Allow-List and Custom ExpressionManagers" class="info" >}}
+The allow-list validation parses expression text using JUEL's AST and runs **before**
+evaluation, as a separate step independent of which `ExpressionManager` is configured.
+It is aligned with `JuelExpressionManager` and `SpringExpressionManager`, which are the
+two expression managers shipped with the engine. If you replace the `ExpressionManager`
+with one that evaluates a different EL dialect (e.g. SpEL), you should also provide a
+matching `QueryExpressionValidator` that understands that dialect.
+{{< /note >}}
+
+##### Additional Resources
+
+* [Unified Expression Language]({{< ref "/user-guide/process-engine/expression-language/unified-expression-language" >}})
+* [Process Engine Configuration Reference]({{< ref "/reference/deployment-descriptors/tags/process-engine.md" >}})
+
+{{< /details >}}
+
 {{< details left="7.24.6" right="Apr/2026">}}
 
 ####  Added Support for Spring Framework 7
