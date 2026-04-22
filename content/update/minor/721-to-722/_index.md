@@ -113,7 +113,7 @@ To work with JBoss EAP 8, consider the following when migrating your process app
 
 [wildfly26-modules]: https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/wildfly/camunda-wildfly26-modules/
 [wildfly26-webapp]: https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-jboss/
-[wildfly26-rest-api]: https://artifacts.camunda.com/artifactory/public/org/camunda/bpm/camunda-engine-rest/
+[wildfly26-rest-api]: https://artifacts.camunda.com/artifactory/private/org/camunda/bpm/camunda-engine-rest/
 
 ## Migrate process applications
 
@@ -167,7 +167,7 @@ If you prefer to stay on `Tomcat 9`, you can still download the `Java EE` compli
 To work with `Tomcat 10`, consider the following when migrating your process applications and replacing artifacts on the application server:
 
 [tomcat9-webapp]: https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-tomcat/
-[tomcat9-rest-api]: https://artifacts.camunda.com/artifactory/public/org/camunda/bpm/camunda-engine-rest/
+[tomcat9-rest-api]: https://artifacts.camunda.com/artifactory/private/org/camunda/bpm/camunda-engine-rest/
 
 ## Migrate process applications
 

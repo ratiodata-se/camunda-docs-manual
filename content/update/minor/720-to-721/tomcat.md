@@ -99,7 +99,7 @@ Copy these libraries from `$TOMCAT_DISTRIBUTION/lib` to the folder `$TOMCAT_HOME
 The following steps are required to update the Camunda REST API on a Tomcat instance:
 
 1. Undeploy an existing web application with a name like `camunda-engine-rest`.
-2. Download the REST API web application archive from our [Artifact Repository][artifact-repository-restapi] Alternatively, switch to the private repository for the enterprise version (credentials from license required). Choose the correct version named `$PLATFORM_VERSION/camunda-engine-rest-$PLATFORM_VERSION-tomcat.war`.
+2. Download the REST API web application archive from our [Artifact Repository][artifact-repository-restapi]. Choose the correct version named `$PLATFORM_VERSION/camunda-engine-rest-$PLATFORM_VERSION-tomcat.war`.
 3. Deploy the web application archive to your Tomcat instance.
 
 ## Update Cockpit, Tasklist, and Admin
@@ -107,7 +107,7 @@ The following steps are required to update the Camunda REST API on a Tomcat inst
 The following steps are required to update the Camunda web applications Cockpit, Tasklist, and Admin on a Tomcat instance:
 
 1. Undeploy an existing web application with a name like `camunda-webapp`.
-2. Download the Camunda web application archive from our [Artifact Repository][artifact-repository-webapp]. Alternatively, switch to the private repository for the enterprise version (credentials from license required). Choose the correct version named `$PLATFORM_VERSION/camunda-webapp-tomcat-$PLATFORM_VERSION.war`.
+2. Download the Camunda web application archive from our [Artifact Repository][artifact-repository-webapp]. Choose the correct version named `$PLATFORM_VERSION/camunda-webapp-tomcat-$PLATFORM_VERSION.war`.
 3. Deploy the web application archive to your Tomcat instance.
 
 [update-guide]: {{< ref "/update/minor/720-to-721/_index.md" >}}

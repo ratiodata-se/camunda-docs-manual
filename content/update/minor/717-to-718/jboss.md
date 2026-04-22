@@ -121,7 +121,6 @@ The following steps are required to update the Camunda web applications Cockpit,
 
 1. Undeploy an existing web application with a name like `camunda-webapp`.
 2. Download the Camunda web application archive from our [Artifact Repository][webapp-jboss].
-   Alternatively, switch to the private repository for the enterprise version (credentials from license required).
    Choose the correct version named `$PLATFORM_VERSION/camunda-webapp-jboss.war`.
 3. Deploy the web application archive to your JBoss/Wildfly instance.
 

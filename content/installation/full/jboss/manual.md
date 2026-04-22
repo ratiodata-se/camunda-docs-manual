@@ -151,7 +151,6 @@ This section describes how to install optional dependencies. None of these are r
 The following steps are required to deploy the web application:
 
 1. Download the Camunda web application that contains the web applications from our Maven Artifactory.
-    Alternatively, switch to the private repository for the enterprise version (credentials from license required).
     * https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-wildfly/ - the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-wildfly-$PLATFORM_VERSION.war`.
 2. Optionally, you may change the context path to which the application will be deployed (default is `/camunda`).
     Edit the file `WEB-INF/jboss-web.xml` in the war file and update the `context-root` element accordingly.
@@ -165,8 +164,8 @@ The following steps are required to deploy the web application:
 The following steps are required to deploy the REST API:
 
 1. Download the REST API web application archive from our Maven Artifactory.
-   Alternatively, switch to the private repository for the enterprise version (credentials from license required).
-    * https://artifacts.camunda.com/artifactory/public/org/camunda/bpm/camunda-engine-rest-jakarta/ - the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-jakarta-$PLATFORM_VERSION-wildfly.war`.
+    * https://artifacts.camunda.com/artifactory/private/org/camunda/bpm/camunda-engine-rest-jakarta/ - the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-jakarta-$PLATFORM_VERSION-wildfly.war`.
+    * Note: this repository is private and requires authentication. Configure your Artifactory access credentials (for example via your Maven `settings.xml`) before downloading, otherwise you may receive HTTP 401/403 responses.
 2. Optionally, you may change the context path to which the REST API will be deployed (default is `/engine-rest`).
    Edit the file `WEB-INF/jboss-web.xml` in the war file and update the `context-root` element accordingly.
 3. Copy the war file to `$WILDFLY_HOME/standalone/deployments`.

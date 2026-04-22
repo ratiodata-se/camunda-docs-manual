@@ -53,19 +53,29 @@ to
 <dependency>
   <groupId>org.camunda.bpm</groupId>
   <artifactId>camunda-engine</artifactId>
-  <version>7.0.0-Final</version>
+  <version>$PLATFORM_VERSION</version>
 </dependency>
 ```
 
-Make sure that you have the Camunda Maven Repository set correctly:
+Make sure that you have the Camunda Maven repository configured. The correct repository depends on your edition:
+
+**Community Edition (CE):** Camunda CE artifacts are available on [Maven Central](https://central.sonatype.com/) and do not require any additional repository configuration. No credentials are needed.
+
+**Enterprise Edition (EE):** Add the private Camunda repository and supply your EE credentials:
 
 ```xml
 <repository>
   <id>camunda-bpm-nexus</id>
   <name>camunda Maven Repository</name>
-  <url>https://artifacts.camunda.com/artifactory/public/</url>
+  <url>https://artifacts.camunda.com/artifactory/private/</url>
 </repository>
 ```
+
+For instructions on how to configure credentials, see [Apache Maven - Enterprise Edition](https://docs.camunda.org/get-started/apache-maven/#enterprise-edition-1).
+
+{{< note title="Private Repository requires credentials" class="warning" >}}
+The private repository (`https://artifacts.camunda.com/artifactory/private/`) requires authentication with a valid Camunda Enterprise license. CE users who configure this repository without credentials will receive authentication errors. CE users should rely on Maven Central instead.
+{{< /note >}}
 
 
 # Adjust Package Names

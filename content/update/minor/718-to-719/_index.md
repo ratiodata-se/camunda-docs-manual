@@ -154,7 +154,7 @@ To work with Wildfly 27, consider the following when migrating your process appl
 
 [wildfly26-modules]: https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/wildfly/camunda-wildfly26-modules/
 [wildfly26-webapp]: https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-jboss/
-[wildfly26-rest-api]: https://artifacts.camunda.com/artifactory/public/org/camunda/bpm/camunda-engine-rest/
+[wildfly26-rest-api]: https://artifacts.camunda.com/artifactory/private/org/camunda/bpm/camunda-engine-rest/
 
 ## Migrate process applications
 

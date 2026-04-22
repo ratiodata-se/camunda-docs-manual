@@ -76,13 +76,6 @@ To officially begin migrating from Camunda 7 Community Edition to the Enterprise
     ```xml
     <repositories>
       <repository>
-        <id>camunda-bpm-nexus</id>
-        <name>camunda-bpm-nexus</name>
-        <url>
-        https://artifacts.camunda.com/artifactory/public/
-        </url>
-      </repository>
-      <repository>
         <id>Camunda-bpm-nexus-ee</id>
         <name>camunda-bpm-nexus</name>
         <url>

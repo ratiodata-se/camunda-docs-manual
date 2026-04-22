@@ -99,10 +99,9 @@ Copy these libraries from `$TOMCAT_DISTRIBUTION/lib` to the folder `$TOMCAT_HOME
 The following steps are required to update the Camunda REST API on a Tomcat instance:
 
 1. Undeploy an existing web application with a name like `camunda-engine-rest`.
-2. Download the REST API web application archive from our [Artifact Repository][artifact-repository-restapi] Alternatively, switch to the private repository for the enterprise version (credentials from license required). 
-2. Download the Camunda web application archive from our [Artifact Repository][artifact-repository-webapp]. Alternatively, switch to the private repository for the enterprise version (credentials from license required). Choose accordingly:
-    * For [Tomcat 10](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-tomcat-jakarta/), the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-tomcat-jakarta-$PLATFORM_VERSION.war`.
-    * For [Tomcat 9](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-tomcat/), the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-tomcat-$PLATFORM_VERSION.war`.
+2. Download the REST API web application archive from our [Artifact Repository][artifact-repository-restapi]. Choose accordingly:
+    * For [Tomcat 10](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/camunda-engine-rest-jakarta/), the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-jakarta-$PLATFORM_VERSION-tomcat.war`.
+    * For [Tomcat 9](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/camunda-engine-rest/), the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-$PLATFORM_VERSION-tomcat.war`.
 
 3. Deploy the web application archive to your Tomcat instance.
 
@@ -111,7 +110,7 @@ The following steps are required to update the Camunda REST API on a Tomcat inst
 The following steps are required to update the Camunda web applications Cockpit, Tasklist, and Admin on a Tomcat instance:
 
 1. Undeploy an existing web application with a name like `camunda-webapp`.
-2. Download the Camunda web application archive from our [Artifact Repository][artifact-repository-webapp]. Alternatively, switch to the private repository for the enterprise version (credentials from license required). Choose accordingly:
+2. Download the Camunda web application archive from our [Artifact Repository][artifact-repository-webapp]. Choose accordingly:
     * For [Tomcat 10](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-tomcat-jakarta/), the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-tomcat-jakarta-$PLATFORM_VERSION.war`.
     * For [Tomcat 9](https://artifacts.camunda.com/ui/native/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-tomcat/), the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-tomcat-$PLATFORM_VERSION.war`.
 3. Deploy the web application archive to your Tomcat instance.

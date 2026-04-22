@@ -139,8 +139,7 @@ The following steps are required to update the Camunda REST API on a JBoss/WildF
 
 1. Undeploy an existing web application with a name like `camunda-engine-rest`.
 2. Download the REST API web application archive from our Maven Artifactory.
-   Alternatively, switch to the private repository for the enterprise version (credentials from license required).
-    * For [WildFly / JBoss EAP 8](https://artifacts.camunda.com/artifactory/public/org/camunda/bpm/camunda-engine-rest-jakarta/), the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-jakarta-$PLATFORM_VERSION-wildfly.war`.
+    * For [WildFly / JBoss EAP 8](https://artifacts.camunda.com/artifactory/private/org/camunda/bpm/camunda-engine-rest-jakarta/), the name of the artifact is `$PLATFORM_VERSION/camunda-engine-rest-jakarta-$PLATFORM_VERSION-wildfly.war`.
 3. Deploy the web application archive to your JBoss/WildFly instance.
 
 ## Update Cockpit, Tasklist, and Admin
@@ -149,7 +148,6 @@ The following steps are required to update the Camunda web applications Cockpit,
 
 1. Un-deploy an existing web application with a name like `camunda-webapp`.
 2. Download the Camunda web application that contains the web applications from our Maven Artifactory.
-   Alternatively, switch to the private repository for the enterprise version (credentials from license required).
     * For [WildFly / JBoss EAP 8](https://artifacts.camunda.com/artifactory/camunda-bpm/org/camunda/bpm/webapp/camunda-webapp-wildfly/), the name of the artifact is `$PLATFORM_VERSION/camunda-webapp-wildfly-$PLATFORM_VERSION.war`.
 3. Deploy the web application archive to your JBoss/WildFly instance.
 
